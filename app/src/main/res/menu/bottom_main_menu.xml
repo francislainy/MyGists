@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/tab_home"
+            android:icon="@drawable/selector_home_tab"
+            android:title="@string/tab_home"
+            app:showAsAction="always"/>
+
+    <item
+            android:id="@+id/tab_fitness"
+            android:icon="@drawable/selector_home_tab"
+            android:title="Fitness"
+            app:showAsAction="always"/>
+
+    <item
+            android:id="@+id/tab_nutrition"
+            android:icon="@drawable/selector_home_tab"
+            android:title="Nutrition"
+            app:showAsAction="always"/>
+
+    <item
+            android:id="@+id/tab_eap"
+            android:icon="@drawable/selector_home_tab"
+            android:title="EAP"
+            app:showAsAction="always"/>
+
+    <item
+            android:id="@+id/tab_more"
+            android:icon="@drawable/selector_home_tab"
+            android:title="More"
+            app:showAsAction="always"/>
+
+</menu>
