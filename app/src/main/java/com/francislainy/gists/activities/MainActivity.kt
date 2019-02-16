@@ -4,16 +4,19 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
-import com.francislainy.gists.R
 import com.francislainy.gists.fragments.FragmentCounter
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener
 import kotlinx.android.synthetic.main.bottom_bar_navigation.*
+import kotlinx.android.synthetic.main.toolbar_widget.*
+
+const val FIRST = 1
+const val SECOND = 2
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(com.francislainy.gists.R.layout.activity_main)
 
         bottomBarNavigationView()
     }
@@ -21,14 +24,14 @@ class MainActivity : AppCompatActivity() {
     private fun bottomBarNavigationView() {
 
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-        navigation.selectedItemId = R.id.tab_home
+        navigation.selectedItemId = com.francislainy.gists.R.id.tab_home
     }
 
     private val onNavigationItemSelectedListener = object : OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
             when (item.itemId) {
-                R.id.tab_home -> {
+                com.francislainy.gists.R.id.tab_home -> {
 //                    displayView(HOME_MAIN)
 
                     replaceFragment()
@@ -36,7 +39,7 @@ class MainActivity : AppCompatActivity() {
                     return true
                 }
 
-                R.id.tab_fitness -> {
+                com.francislainy.gists.R.id.tab_fitness -> {
 //                    displayView(HOME_MAIN)
 
                     replaceFragment()
@@ -44,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                     return true
                 }
 
-                R.id.tab_nutrition -> {
+                com.francislainy.gists.R.id.tab_nutrition -> {
 //                    displayView(HOME_MAIN)
 
                     replaceFragment()
@@ -52,7 +55,7 @@ class MainActivity : AppCompatActivity() {
                     return true
                 }
 
-                R.id.tab_eap -> {
+                com.francislainy.gists.R.id.tab_eap -> {
 //                    displayView(HOME_MAIN)
 
                     replaceFragment()
@@ -60,7 +63,7 @@ class MainActivity : AppCompatActivity() {
                     return true
                 }
 
-                R.id.tab_more -> {
+                com.francislainy.gists.R.id.tab_more -> {
 //                    displayView(HOME_MAIN)
 
                     replaceFragment()
@@ -74,6 +77,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun replaceFragment() {
         val fragmentManager: FragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().add(R.id.container_body, FragmentCounter()).commit()
+        fragmentManager.beginTransaction().add(com.francislainy.gists.R.id.container_body, FragmentCounter()).commit()
+    }
+
+    fun toolbarSetUP(pos: Int) {
+
+        when(pos) {
+
+           FIRST -> tvToolBarTitle.text = "First"
+           SECOND -> tvToolBarTitle.text = "Second"
+        }
+
     }
 }

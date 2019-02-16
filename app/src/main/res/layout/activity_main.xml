@@ -8,6 +8,10 @@
         android:orientation="vertical"
         tools:context=".activities.MainActivity">
 
+    <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar_widget" />
+
     <FrameLayout
             android:id="@+id/container_body"
             android:layout_width="match_parent"
