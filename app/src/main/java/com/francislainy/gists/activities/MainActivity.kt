@@ -3,14 +3,11 @@ package com.francislainy.gists.activities
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
-import com.francislainy.gists.fragments.FragmentCounter
+import com.francislainy.gists.R
+import com.francislainy.gists.util.FIRST
+import com.francislainy.gists.util.ToolbarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener
 import kotlinx.android.synthetic.main.bottom_bar_navigation.*
-import kotlinx.android.synthetic.main.toolbar_widget.*
-
-const val FIRST = 1
-const val SECOND = 2
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,49 +21,39 @@ class MainActivity : AppCompatActivity() {
     private fun bottomBarNavigationView() {
 
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-        navigation.selectedItemId = com.francislainy.gists.R.id.tab_home
+        navigation.selectedItemId = R.id.tab_home
     }
 
     private val onNavigationItemSelectedListener = object : OnNavigationItemSelectedListener {
         override fun onNavigationItemSelected(item: MenuItem): Boolean {
 
             when (item.itemId) {
-                com.francislainy.gists.R.id.tab_home -> {
-//                    displayView(HOME_MAIN)
-
-                    replaceFragment()
+                R.id.tab_home -> {
+                    displayView(FIRST)
 
                     return true
                 }
 
-                com.francislainy.gists.R.id.tab_fitness -> {
+                R.id.tab_fitness -> {
 //                    displayView(HOME_MAIN)
-
-                    replaceFragment()
 
                     return true
                 }
 
-                com.francislainy.gists.R.id.tab_nutrition -> {
+                R.id.tab_nutrition -> {
 //                    displayView(HOME_MAIN)
-
-                    replaceFragment()
 
                     return true
                 }
 
-                com.francislainy.gists.R.id.tab_eap -> {
+                R.id.tab_eap -> {
 //                    displayView(HOME_MAIN)
-
-                    replaceFragment()
 
                     return true
                 }
 
-                com.francislainy.gists.R.id.tab_more -> {
+                R.id.tab_more -> {
 //                    displayView(HOME_MAIN)
-
-                    replaceFragment()
 
                     return true
                 }
@@ -75,18 +62,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun replaceFragment() {
-        val fragmentManager: FragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().add(com.francislainy.gists.R.id.container_body, FragmentCounter()).commit()
+    fun displayView(pos: Int) {
+        ToolbarLayout(this@MainActivity).replaceFragment(pos)
     }
 
-    fun toolbarSetUP(pos: Int) {
-
-        when(pos) {
-
-           FIRST -> tvToolBarTitle.text = "First"
-           SECOND -> tvToolBarTitle.text = "Second"
-        }
-
+    fun displayToolbar(pos: Int) {
+        ToolbarLayout(this@MainActivity).toolbarSetUP(pos)
     }
+
 }
