@@ -17,20 +17,28 @@ class ToolbarLayout(private val mainActivity: MainActivity) {
     fun toolbarSetUP(pos: Int) {
 
         with(mainActivity) {
-            when (pos) {
 
-                FIRST -> {
+            mainActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+            when (pos) {
+                 FIRST -> {
                     tvToolBarTitle.text = "First"
-                    mainActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-                    mainActivity.supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp)
+                     toolbarWithHamburger()
                 }
                 SECOND -> {
                     tvToolBarTitle.text = "Second"
-                    mainActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-                    mainActivity.supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp)
+                    toolbarWithBackArrow()
                 }
             }
         }
+    }
+
+    private fun toolbarWithHamburger() {
+        mainActivity.supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp)
+    }
+
+    private fun toolbarWithBackArrow() {
+        mainActivity.supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_arrow_back_white_24dp)
     }
 
     fun replaceFragment(pos: Int) {
