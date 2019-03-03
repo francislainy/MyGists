@@ -12,23 +12,24 @@
             android:layout_margin="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:id="@+id/donutTimer"
+            custom:donut_max="30"
             app:donut_finished_stroke_width="6dp"
             app:donut_unfinished_stroke_width="3dp"
             custom:donut_progress="0"
             custom:donut_text_size="10sp"
             custom:donut_finished_color="@color/orange"
-            custom:donut_unfinished_color="#B2DFDB"
+            custom:donut_unfinished_color="@color/lightPrimaryColor"
             android:layout_width="48dp"
             android:layout_height="48dp"/>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   xmlns:tools="http://schemas.android.com/tools"
+                  tools:context=".fragments.FragmentCounter"
+                  android:id="@+id/ll_parent"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:orientation="vertical"
                   app:layout_constraintTop_toBottomOf="@id/donutTimer"
-                  tools:context=".fragments.FragmentCounter"
-                  android:id="@+id/ll_parent"
                   app:layout_constraintStart_toStartOf="parent"
                   android:layout_marginStart="8dp"
                   app:layout_constraintEnd_toEndOf="parent"
@@ -52,47 +53,23 @@
 
             <Button
                     android:id="@+id/btn1"
-                    android:layout_gravity="fill_horizontal"
-                    android:layout_width="0dp"
-                    android:background="@color/orange"
-                    android:layout_columnWeight="1"
                     tools:text="1"
-                    android:textColor="@color/white"
-                    android:layout_margin="4dp"
-                    android:layout_height="80dp"/>
+                    style="@style/button_answer"/>
 
             <Button
                     android:id="@+id/btn2"
-                    android:layout_gravity="fill_horizontal"
-                    android:layout_width="0dp"
-                    android:background="@color/orange"
-                    android:layout_columnWeight="1"
-                    tools:text="2"
-                    android:textColor="@color/white"
-                    android:layout_margin="4dp"
-                    android:layout_height="80dp"/>
+                    style="@style/button_answer"
+                    tools:text="2"/>
 
             <Button
                     android:id="@+id/btn3"
                     tools:text="3"
-                    android:background="@color/orange"
-                    android:layout_gravity="fill_horizontal"
-                    android:layout_columnWeight="1"
-                    android:layout_width="0dp"
-                    android:textColor="@color/white"
-                    android:layout_margin="4dp"
-                    android:layout_height="80dp"/>
+                    style="@style/button_answer"/>
 
             <Button
                     android:id="@+id/btn4"
                     tools:text="4"
-                    android:background="@color/orange"
-                    android:layout_gravity="fill_horizontal"
-                    android:layout_width="0dp"
-                    android:layout_columnWeight="1"
-                    android:layout_margin="4dp"
-                    android:textColor="@color/white"
-                    android:layout_height="80dp"/>
+                    style="@style/button_answer"/>
 
         </GridLayout>
 
