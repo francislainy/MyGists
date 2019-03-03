@@ -1,5 +1,7 @@
 package com.francislainy.gists.fragments
 
+import android.animation.Animator
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.O
@@ -7,20 +9,28 @@ import android.os.Bundle
 import android.os.VibrationEffect.DEFAULT_AMPLITUDE
 import android.os.VibrationEffect.createOneShot
 import android.os.Vibrator
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.DecelerateInterpolator
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.francislainy.gists.R
 import com.francislainy.gists.activities.MainActivity
 import com.francislainy.gists.util.FIRST
 import com.francislainy.gists.util.toast
+import com.github.lzyzsd.circleprogress.DonutProgress
 import kotlinx.android.synthetic.main.fragment_counter.*
 
+
+private val LOG_TAG: String? = "FragmentCounter"
 
 class FragmentCounter : Fragment() {
 
     private var v: Vibrator? = null
+    private val listObjectAnimator = java.util.ArrayList<ObjectAnimator>()
 
     private lateinit var questionsList: ArrayList<Int>
     private var question: Int? = null
@@ -43,6 +53,8 @@ class FragmentCounter : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        questionsList = arrayListOf(5, 1, 15, 2) // List with questions that will appear for the user to guess
+
         v = activity!!.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
 
         btnList = listOf<Button>(btn1, btn2, btn3, btn4)
@@ -50,10 +62,9 @@ class FragmentCounter : Fragment() {
             b.setOnClickListener(onClickButton)
         }
 
-        questionsList = arrayListOf(5, 1, 15, 2) // List with questions that will appear for the user to guess
 
         question = questionsList[indexQuestion]
-        tvCounter.text = question.toString()
+        tvQuestion.text = question.toString()
         indexQuestion++
 
         loadAllPossibleAnswers()
@@ -62,7 +73,62 @@ class FragmentCounter : Fragment() {
 
             btnList[index].text = answer
         }
+
+        updateDonutProgress(50f) //todo
     }
+
+    private fun updateDonutProgress(progressParam: Float) {
+
+        val progress: Float = if (progressParam >= 100) {
+            100f // this is just in case if the user is over the target so the Donut doenst go over 100%
+        } else {
+            progressParam
+        }
+
+        // Donut Progress Animation :)
+        activity!!.runOnUiThread {
+            val anim = ObjectAnimator.ofFloat(donutTimer, "progress", 0f, progress)
+            anim.interpolator = DecelerateInterpolator()
+            anim.duration = 1000
+            anim.start()
+
+            listObjectAnimator.add(anim)
+
+            val donutTimer = activity!!.findViewById(com.francislainy.gists.R.id.donutTimer) as DonutProgress
+
+            anim.addListener(object : Animator.AnimatorListener {
+                override fun onAnimationStart(animation: Animator) {
+                    Log.d(LOG_TAG, "onAnimationStart")
+                }
+
+                override fun onAnimationCancel(animation: Animator) {
+                    Log.d(LOG_TAG, "onAnimationCancel")
+                }
+
+                override fun onAnimationRepeat(animation: Animator) {
+                    Log.d(LOG_TAG, "onAnimationRepeat")
+                }
+
+                override fun onAnimationEnd(animation: Animator) {
+
+                    Log.d(LOG_TAG, "onAnimationEnd")
+
+                    if (progress >= 100) {
+
+                        donutTimer.innerBackgroundColor = ContextCompat.getColor(activity as MainActivity, R.color.colorPrimary)
+
+                    } else {
+
+                        donutTimer.innerBackgroundColor = ContextCompat.getColor(activity as MainActivity, android.R.color.transparent)
+                    }
+
+                }
+
+            })
+        }
+
+    }
+
 
     private fun loadAllPossibleAnswers() {
         populatePossibleAnswers(0, arrayListOf("1+4", "9+1", "13+2", "10+10"))
@@ -91,13 +157,13 @@ class FragmentCounter : Fragment() {
         val numA = num[0].toInt()
         val numB = num[1].toInt()
 
-        if ((numA + numB).toString() == tvCounter.text) {
+        if ((numA + numB).toString() == tvQuestion.text) {
 
             activity?.toast("Right")
             vibrateDevice()
 
             question = questionsList[indexQuestion]
-            tvCounter.text = question.toString()
+            tvQuestion.text = question.toString()
             indexQuestion++
 
 

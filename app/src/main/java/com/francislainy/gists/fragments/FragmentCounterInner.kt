@@ -42,6 +42,6 @@ class FragmentCounterInner : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvCounter.text = "second"
+        tvQuestion.text = "second"
     }
 }
