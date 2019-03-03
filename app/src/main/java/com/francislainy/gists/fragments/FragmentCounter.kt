@@ -9,11 +9,14 @@ import android.os.CountDownTimer
 import android.os.VibrationEffect.DEFAULT_AMPLITUDE
 import android.os.VibrationEffect.createOneShot
 import android.os.Vibrator
+import android.text.Spannable
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.francislainy.gists.R
 import com.francislainy.gists.activities.MainActivity
@@ -37,6 +40,7 @@ class FragmentCounter : Fragment() {
     private var map: LinkedHashMap<Int, ArrayList<String>> = LinkedHashMap()
 
     private lateinit var btnList: List<Button>
+    private var points = 0
 
     override fun onResume() {
         super.onResume()
@@ -44,6 +48,7 @@ class FragmentCounter : Fragment() {
         (activity as MainActivity).displayToolbar(FIRST)
 
         v = activity!!.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
+        points = 0
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -54,27 +59,34 @@ class FragmentCounter : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        donutTimer = view.findViewById(R.id.donutTimer)
+        setTextForPoints()
 
-        questionsList = arrayListOf(5, 1, 15, 2) // List with questions that will appear for the user to guess
+        donutTimer = view.findViewById(com.francislainy.gists.R.id.donutTimer)
 
         v = activity!!.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
+
+        questionsList = arrayListOf(5, 1, 15, 2) // List with questions that will appear for the user to guess
 
         btnList = listOf<Button>(btn1, btn2, btn3, btn4)
         for (b in btnList) {
             b.setOnClickListener(onClickButton)
         }
 
-
         question = questionsList[indexQuestion]
         tvQuestion.text = question.toString()
         indexQuestion++
+
 
         loadAllPossibleAnswers()
 
         populateButtonsWithAnswers()
 
+        setCounter()
 
+        updateDonutProgress()
+    }
+
+    private fun setCounter() {
         object : CountDownTimer(30000, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
@@ -89,17 +101,14 @@ class FragmentCounter : Fragment() {
 
                 donutTimer.apply {
                     text = "done!"
-                    textColor = setColor(activity as MainActivity, R.color.white)
-                    innerBackgroundColor = setColor(activity as MainActivity, R.color.colorPrimary)
-                    unfinishedStrokeColor = setColor(activity as MainActivity, R.color.colorPrimary)
-                    finishedStrokeColor = setColor(activity as MainActivity, R.color.colorPrimary)
+                    textColor = setColor(R.color.white)
+                    innerBackgroundColor = setColor(R.color.colorPrimary)
+                    unfinishedStrokeColor = setColor(R.color.colorPrimary)
+                    finishedStrokeColor = setColor(R.color.colorPrimary)
                 }
             }
 
         }.start()
-
-
-        updateDonutProgress()
     }
 
     private fun updateDonutProgress() {
@@ -146,6 +155,11 @@ class FragmentCounter : Fragment() {
 
         if ((numA + numB).toString() == tvQuestion.text) {
 
+            points++
+
+            setTextForPoints()
+
+
             activity?.toast("Right")
             vibrateDevice()
 
@@ -159,7 +173,15 @@ class FragmentCounter : Fragment() {
         } else {
             vibrateDevice()
         }
+    }
 
+    private fun setTextForPoints() {
+        tvPoints.setText("Points: $points", TextView.BufferType.SPANNABLE)
+        val span = tvPoints.text as Spannable
+        span.setSpan(
+            ForegroundColorSpan(resources.getColor(R.color.colorPrimary)), 0, "Points:".length,
+            Spannable.SPAN_INCLUSIVE_EXCLUSIVE
+        )
     }
 
     private fun populateButtonsWithAnswers() {

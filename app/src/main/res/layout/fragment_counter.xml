@@ -7,6 +7,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+    <TextView
+            android:layout_margin="16dp"
+            android:id="@+id/tvPoints"
+            android:textColor="@color/orange"
+            android:text="@string/points_fragment_counter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/donutTimer"
+            app:layout_constraintBottom_toBottomOf="@+id/donutTimer"
+            app:layout_constraintStart_toStartOf="@+id/ll_parent" android:layout_marginStart="8dp"/>
+
     <com.github.lzyzsd.circleprogress.DonutProgress
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="16dp"
@@ -46,10 +57,12 @@
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                 tools:text="1"/>
 
-        <GridLayout android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:columnCount="2">
+        <GridLayout
+                android:id="@+id/gridLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:columnCount="2">
 
             <Button
                     android:id="@+id/btn1"
