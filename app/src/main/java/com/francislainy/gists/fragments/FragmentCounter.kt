@@ -101,10 +101,10 @@ class FragmentCounter : Fragment() {
 
                 donutTimer.apply {
                     text = "done!"
-                    textColor = setColor(R.color.white)
-                    innerBackgroundColor = setColor(R.color.colorPrimary)
-                    unfinishedStrokeColor = setColor(R.color.colorPrimary)
-                    finishedStrokeColor = setColor(R.color.colorPrimary)
+                    textColor = setColor(activity as MainActivity, R.color.white)
+                    innerBackgroundColor = setColor(activity as MainActivity, R.color.colorPrimary)
+                    unfinishedStrokeColor = setColor(activity as MainActivity, R.color.colorPrimary)
+                    finishedStrokeColor = setColor(activity as MainActivity, R.color.colorPrimary)
                 }
             }
 
