@@ -5,11 +5,13 @@ import androidx.fragment.app.FragmentManager
 import com.francislainy.gists.R
 import com.francislainy.gists.activities.MainActivity
 import com.francislainy.gists.fragments.FragmentCounter
-import com.francislainy.gists.fragments.FragmentCounterInner
+import com.francislainy.gists.fragments.FragmentLocation
+import com.francislainy.gists.fragments.FragmentTitTacToe
 import kotlinx.android.synthetic.main.toolbar_widget.*
 
-const val FIRST = 1
-const val SECOND = 2
+const val FRAG_COUNTER = 10
+const val FRAG_LOCATION = 20
+const val FRAG_TIC_TAC = 30
 
 class ToolbarLayout(private val mainActivity: MainActivity) {
 
@@ -21,13 +23,17 @@ class ToolbarLayout(private val mainActivity: MainActivity) {
             mainActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
             when (pos) {
-                 FIRST -> {
-                    tvToolBarTitle.text = "First"
+                FRAG_COUNTER -> {
+                    tvToolBarTitle.text = "FRAG_COUNTER"
                      toolbarWithHamburger()
                 }
-                SECOND -> {
-                    tvToolBarTitle.text = "Second"
+                FRAG_LOCATION -> {
+                    tvToolBarTitle.text = "FRAG_LOCATION"
                     toolbarWithBackArrow()
+                }
+                FRAG_TIC_TAC -> {
+                    tvToolBarTitle.text = "FRAG_TIC_TAC"
+                    toolbarWithHamburger()
                 }
             }
         }
@@ -46,8 +52,9 @@ class ToolbarLayout(private val mainActivity: MainActivity) {
         val fragmentTransaction = fragmentManager.beginTransaction()
 
         val f: Fragment = when (pos) {
-            FIRST -> FragmentCounter()
-            SECOND -> FragmentCounterInner()
+            FRAG_COUNTER -> FragmentCounter()
+            FRAG_LOCATION -> FragmentLocation()
+            FRAG_TIC_TAC -> FragmentTitTacToe()
             else -> FragmentCounter()
         }
 
@@ -79,7 +86,7 @@ class ToolbarLayout(private val mainActivity: MainActivity) {
     // The 5 main Tabs (Home, Fitness, Goals, Rewards, Nutrition)
     private fun shouldBeAddedToStackNavigation(TAG: String): Boolean = when (TAG) {
 
-        "FIRST", "HOME_FITNESS", "HOME_GOALS", "HOME_REWARDS", "HOME_NUTRITION" -> false
+        "FRAG_COUNTER", "FRAG_LOCATION", "FRAG_TIC_TAC", "HOME_REWARDS", "HOME_NUTRITION" -> false
 
         else -> true
     }

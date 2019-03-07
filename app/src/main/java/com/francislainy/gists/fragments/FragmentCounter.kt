@@ -20,7 +20,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.francislainy.gists.R
 import com.francislainy.gists.activities.MainActivity
-import com.francislainy.gists.util.FIRST
+import com.francislainy.gists.util.FRAG_COUNTER
 import com.francislainy.gists.util.setColor
 import com.francislainy.gists.util.toast
 import com.github.lzyzsd.circleprogress.DonutProgress
@@ -45,7 +45,7 @@ class FragmentCounter : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        (activity as MainActivity).displayToolbar(FIRST)
+        (activity as MainActivity).displayToolbar(FRAG_COUNTER)
 
         v = activity!!.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator?
         points = 0

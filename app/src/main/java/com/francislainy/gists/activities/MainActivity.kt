@@ -10,7 +10,9 @@ import androidx.appcompat.widget.Toolbar
 import com.francislainy.gists.R
 import com.francislainy.gists.fragments.FragmentDrawer
 import com.francislainy.gists.fragments.FragmentDrawer.FragmentDrawerListener
-import com.francislainy.gists.util.FIRST
+import com.francislainy.gists.util.FRAG_COUNTER
+import com.francislainy.gists.util.FRAG_LOCATION
+import com.francislainy.gists.util.FRAG_TIC_TAC
 import com.francislainy.gists.util.ToolbarLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView.OnNavigationItemSelectedListener
 import kotlinx.android.synthetic.main.activity_main.*
@@ -65,12 +67,13 @@ class MainActivity : AppCompatActivity(), FragmentDrawerListener {
     }
 
     private fun toolbarActionBarSetUP() {
-        // Toolbar (ActionBar) setup
         setSupportActionBar(toolbar as Toolbar)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = null
-        supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp) // set Hamburger default back to the Actionbar ;)
+        supportActionBar?.apply {
+            setDisplayShowHomeEnabled(true)
+            setDisplayHomeAsUpEnabled(true)
+            title = null
+            setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp) // set Hamburger default back to the Actionbar ;)
+        }
     }
 
     private fun setUpDrawer() {
@@ -86,7 +89,7 @@ class MainActivity : AppCompatActivity(), FragmentDrawerListener {
     private fun bottomBarNavigationView() {
 
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-        navigation.selectedItemId = R.id.tab_home
+        navigation.selectedItemId = R.id.tab_nutrition
     }
 
     private val onNavigationItemSelectedListener = object : OnNavigationItemSelectedListener {
@@ -94,19 +97,19 @@ class MainActivity : AppCompatActivity(), FragmentDrawerListener {
 
             when (item.itemId) {
                 R.id.tab_home -> {
-                    displayView(FIRST)
+                    displayView(FRAG_COUNTER)
 
                     return true
                 }
 
                 R.id.tab_fitness -> {
-//                    displayView(HOME_MAIN)
+                    displayView(FRAG_LOCATION)
 
                     return true
                 }
 
                 R.id.tab_nutrition -> {
-//                    displayView(HOME_MAIN)
+                    displayView(FRAG_TIC_TAC)
 
                     return true
                 }

@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.francislainy.gists.R
-import com.francislainy.gists.activities.MainActivity
-import com.francislainy.gists.util.SECOND
 import kotlinx.android.synthetic.main.fragment_counter.*
 
 
@@ -17,7 +15,7 @@ class FragmentCounterInner : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        (activity as MainActivity).displayToolbar(SECOND)
+//        (activity as MainActivity).displayToolbar(SECOND)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
