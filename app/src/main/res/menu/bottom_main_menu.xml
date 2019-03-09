@@ -4,31 +4,31 @@
 
     <item
             android:id="@+id/tab_home"
-            android:icon="@drawable/selector_home_tab"
+            android:icon="@drawable/home_blue"
             android:title="@string/tab_home"
             app:showAsAction="always"/>
 
     <item
             android:id="@+id/tab_location"
-            android:icon="@drawable/selector_location_tab"
+            android:icon="@drawable/ic_location"
             android:title="Location"
             app:showAsAction="always"/>
 
     <item
             android:id="@+id/tab_tic_tac_toe"
-            android:icon="@drawable/selector_tic_tac_toe_tab"
+            android:icon="@drawable/ic_tic_tac_toe"
             android:title="Tic Tac Toe"
             app:showAsAction="always"/>
 
     <item
             android:id="@+id/tab_eap"
-            android:icon="@drawable/selector_home_tab"
+            android:icon="@drawable/home_blue"
             android:title="EAP"
             app:showAsAction="always"/>
 
     <item
             android:id="@+id/tab_more"
-            android:icon="@drawable/selector_home_tab"
+            android:icon="@drawable/home_blue"
             android:title="More"
             app:showAsAction="always"/>
 
