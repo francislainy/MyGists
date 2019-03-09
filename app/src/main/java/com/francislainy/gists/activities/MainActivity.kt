@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity(), FragmentDrawerListener {
     private fun bottomBarNavigationView() {
 
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-        navigation.selectedItemId = R.id.tab_nutrition
+        navigation.selectedItemId = R.id.tab_location
     }
 
     private val onNavigationItemSelectedListener = object : OnNavigationItemSelectedListener {
@@ -102,13 +102,13 @@ class MainActivity : AppCompatActivity(), FragmentDrawerListener {
                     return true
                 }
 
-                R.id.tab_fitness -> {
+                R.id.tab_location -> {
                     displayView(FRAG_LOCATION)
 
                     return true
                 }
 
-                R.id.tab_nutrition -> {
+                R.id.tab_tic_tac_toe -> {
                     displayView(FRAG_TIC_TAC)
 
                     return true

@@ -9,6 +9,7 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,13 +17,26 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.francislainy.campos.weather.model.APIError
+import com.francislainy.campos.weather.model.WeatherLonAndLat
 import com.francislainy.gists.R
 import com.francislainy.gists.activities.MainActivity
+import com.francislainy.gists.api.WeatherLonAndLatAPI
+import com.francislainy.gists.util.FRAG_LOCATION
 import kotlinx.android.synthetic.main.fragment_location.*
 
-var ACCESS_LOCATION = 123
+private var LOG_TAG = "FragLocation"
+private var ACCESS_LOCATION = 123
 
 class FragmentLocation : Fragment() {
+
+    private var location: Location? = null
+
+    override fun onResume() {
+        super.onResume()
+
+        (activity as MainActivity).displayToolbar(FRAG_LOCATION)
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_location, container, false)
@@ -31,9 +45,65 @@ class FragmentLocation : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        loadWeather()
+
         checkPermission()
     }
 
+    private fun loadWeather() {
+
+        WeatherLonAndLatAPI.postData(object : WeatherLonAndLatAPI.ThisCallback {
+
+            override fun onSuccess(w: WeatherLonAndLat?) {
+
+                Log.e(LOG_TAG, w?.coord?.lat.toString())
+
+
+//                updateUI(weather_LonAndLat_!!)
+
+                Toast.makeText(activity, w?.weather?.get(0)?.main, Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure() {
+
+                Log.e(LOG_TAG, "onFailure")
+            }
+
+            override fun onError(error: APIError) {
+
+                Log.e(LOG_TAG, "Exception: " + error.errorMessage!!)
+
+//                toast(" error ----")
+            }
+        })
+    }
+
+//    private fun updateUI(weather_LonAndLat_: WeatherLonAndLat) {
+//
+//        Toast.makeText(applicationContext, weather_LonAndLat_.weather?.get(0)?.description, Toast.LENGTH_LONG).show()
+//
+//        val weather = weather_LonAndLat_.weather?.get(0)?.description
+//
+//        when {
+//
+//            weather?.contains("sunny")!! -> iv_weather.setImageResource(R.drawable.sunny)
+//
+//            weather.contains("scattered clouds") -> iv_weather.setImageResource(scattered_clouds)
+//
+//            weather.contains("light rain") -> iv_weather.setImageResource(rainy)
+//
+//            else -> iv_weather.setImageResource(heavy_snow)
+//
+//        }
+//
+////        Log.i(LOG_TAG, weather_LonAndLat_?.weather?.get(0))
+//
+//        tv_weather.text = weather_LonAndLat_.weather?.get(0)?.description
+//    }
+
+    /**
+     * LOCATION
+     */
     private fun checkPermission() {
 
         val context = activity as MainActivity
@@ -75,8 +145,6 @@ class FragmentLocation : Fragment() {
         }
     }
 
-    var location: Location? = null
-
     inner class MyLocationListener : LocationListener {
 
         init {
@@ -96,6 +164,6 @@ class FragmentLocation : Fragment() {
         override fun onProviderEnabled(p0: String?) {}
 
         override fun onProviderDisabled(p0: String?) {}
-
     }
+
 }

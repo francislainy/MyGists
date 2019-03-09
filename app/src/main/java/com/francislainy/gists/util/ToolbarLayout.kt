@@ -20,19 +20,19 @@ class ToolbarLayout(private val mainActivity: MainActivity) {
 
         with(mainActivity) {
 
-            mainActivity.supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+            supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
             when (pos) {
                 FRAG_COUNTER -> {
-                    tvToolBarTitle.text = "FRAG_COUNTER"
+                    tvToolBarTitle.text = "COUNTER"
                      toolbarWithHamburger()
                 }
                 FRAG_LOCATION -> {
-                    tvToolBarTitle.text = "FRAG_LOCATION"
+                    tvToolBarTitle.text = "LOCATION"
                     toolbarWithBackArrow()
                 }
                 FRAG_TIC_TAC -> {
-                    tvToolBarTitle.text = "FRAG_TIC_TAC"
+                    tvToolBarTitle.text = "TIC TAC TOE"
                     toolbarWithHamburger()
                 }
             }

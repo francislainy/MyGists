@@ -13,8 +13,9 @@
             android:background="?android:attr/windowBackground"
             app:itemBackground="@color/colorPrimary"
             android:foreground="?attr/selectableItemBackground"
-            app:itemIconTint="@color/blue_clear_ocean"
-            app:itemTextColor="@color/blue_clear_ocean"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            app:labelVisibilityMode="unlabeled"
             app:menu="@menu/bottom_main_menu"/>
 
 </LinearLayout>

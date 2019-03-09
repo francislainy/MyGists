@@ -9,15 +9,15 @@
             app:showAsAction="always"/>
 
     <item
-            android:id="@+id/tab_fitness"
-            android:icon="@drawable/selector_home_tab"
-            android:title="Fitness"
+            android:id="@+id/tab_location"
+            android:icon="@drawable/selector_location_tab"
+            android:title="Location"
             app:showAsAction="always"/>
 
     <item
-            android:id="@+id/tab_nutrition"
-            android:icon="@drawable/selector_home_tab"
-            android:title="Nutrition"
+            android:id="@+id/tab_tic_tac_toe"
+            android:icon="@drawable/selector_tic_tac_toe_tab"
+            android:title="Tic Tac Toe"
             app:showAsAction="always"/>
 
     <item
