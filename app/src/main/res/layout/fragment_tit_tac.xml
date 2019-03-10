@@ -12,18 +12,15 @@
             android:layout_height="wrap_content">
 
         <Button
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:id="@+id/btn1"/>
+                android:id="@+id/btn1"
+                style="@style/button_tic_tac_toe"/>
 
         <Button
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                style="@style/button_tic_tac_toe"
                 android:id="@+id/btn2"/>
 
         <Button
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                style="@style/button_tic_tac_toe"
                 android:id="@+id/btn3"/>
     </TableRow>
 
@@ -33,18 +30,15 @@
             android:layout_height="80dp">
 
         <Button
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                style="@style/button_tic_tac_toe"
                 android:id="@+id/btn4"/>
 
         <Button
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                style="@style/button_tic_tac_toe"
                 android:id="@+id/btn5"/>
 
         <Button
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                style="@style/button_tic_tac_toe"
                 android:id="@+id/btn6"/>
 
     </TableRow>
@@ -55,18 +49,15 @@
             android:layout_height="wrap_content">
 
         <Button
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                style="@style/button_tic_tac_toe"
                 android:id="@+id/btn7"/>
 
         <Button
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                style="@style/button_tic_tac_toe"
                 android:id="@+id/btn8"/>
 
         <Button
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                style="@style/button_tic_tac_toe"
                 android:id="@+id/btn9"/>
 
     </TableRow>

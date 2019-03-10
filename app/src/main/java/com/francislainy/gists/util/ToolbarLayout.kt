@@ -29,7 +29,7 @@ class ToolbarLayout(private val mainActivity: MainActivity) {
                 }
                 FRAG_LOCATION -> {
                     tvToolBarTitle.text = "LOCATION"
-                    toolbarWithBackArrow()
+                    toolbarWithHamburger()
                 }
                 FRAG_TIC_TAC -> {
                     tvToolBarTitle.text = "TIC TAC TOE"

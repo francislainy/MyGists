@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity(), FragmentDrawerListener {
     private fun bottomBarNavigationView() {
 
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener)
-        navigation.selectedItemId = R.id.tab_location
+        navigation.selectedItemId = R.id.tab_tic_tac_toe
     }
 
     private val onNavigationItemSelectedListener = object : OnNavigationItemSelectedListener {

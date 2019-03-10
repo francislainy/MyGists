@@ -31,6 +31,7 @@ private var ACCESS_LOCATION = 123
 class FragmentLocation : Fragment() {
 
     private var location: Location? = null
+//    private var tvLocation: TextView? = null // Adding it here instead of using extension to avoid NPE
 
     override fun onResume() {
         super.onResume()
@@ -44,6 +45,8 @@ class FragmentLocation : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+//        tvLocation = view.findViewById(R.id.tvLocation)
 
         loadWeather()
 
@@ -156,7 +159,7 @@ class FragmentLocation : Fragment() {
         override fun onLocationChanged(p0: Location?) {
             location = p0
 
-            tvLocation.text = location?.latitude.toString()
+            tvLocation?.text = location?.latitude.toString()
         }
 
         override fun onStatusChanged(p0: String?, p1: Int, p2: Bundle?) {}
