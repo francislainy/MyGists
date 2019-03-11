@@ -14,7 +14,8 @@ import kotlinx.android.synthetic.main.fragment_tit_tac.*
 
 class FragmentTitTacToe : Fragment() {
 
-    private var is0 = true //next value
+    private var isNext0 = true // Next value
+    private lateinit var buttons: List<Button>
 
     override fun onResume() {
         super.onResume()
@@ -25,8 +26,6 @@ class FragmentTitTacToe : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_tit_tac, container, false)
     }
-
-    private lateinit var buttons: List<Button>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,46 +43,82 @@ class FragmentTitTacToe : Fragment() {
 
         if (b.text == "") {
 
-            if (is0) {
+            if (isNext0) {
                 b.text = "0"
-                checkWinner("0")
-                is0 = false
+                if (checkHasWinner()) {
+                    activity?.toast("Winner 0")
+                }
+                isNext0 = false
             } else {
                 b.text = "X"
-                checkWinner("X")
-                is0 = true
+                if (checkHasWinner()) {
+                    activity?.toast("Winner X")
+                }
+                isNext0 = true
             }
         }
     }
 
-    private fun checkWinner(value: String) {
+    private fun checkIsDrawFinishGame(): Boolean {
 
-        if (btn1.text == btn2.text && btn1.text == btn3.text && btn1.text != "" && btn2.text != "" && btn3.text != "") { // First row horizontal
+        var isDraw = true
 
-            activity?.toast("Winner $value")
-        } else if (btn1.text == btn4.text && btn1.text == btn7.text && btn1.text != "" && btn4.text != "" && btn7.text != "") { // First column vertical
+        for (b in buttons) {
 
-            activity?.toast("Winner $value")
-        } else if (btn4.text == btn5.text && btn4.text == btn6.text && btn4.text != "" && btn5.text != "" && btn6.text != "") { // Second row horizontal
-
-            activity?.toast("Winner $value")
-        } else if (btn2.text == btn5.text && btn2.text == btn8.text && btn2.text != "" && btn5.text != "" && btn8.text != "") { // Second column vertical
-
-            activity?.toast("Winner $value")
-        } else if (btn7.text == btn8.text && btn8.text == btn9.text && btn7.text != "" && btn8.text != "" && btn9.text != "") { // Third row horizontal
-
-            activity?.toast("Winner $value")
-        } else if (btn3.text == btn6.text && btn3.text == btn9.text && btn3.text != "" && btn6.text != "" && btn9.text != "") { // Third row vertical
-
-            activity?.toast("Winner $value")
-        } else if (btn1.text == btn5.text && btn1.text == btn9.text && btn1.text != "" && btn5.text != "" && btn9.text != "") { // First diagonal crossing left to right
-
-            activity?.toast("Winner $value")
-        } else if (btn3.text == btn5.text && btn3.text == btn7.text && btn3.text != "" && btn5.text != "" && btn7.text != "") { // Second diagonal crossing right to left
-
-            activity?.toast("Winner $value")
+            if (b.text == "") {
+                isDraw = false
+            }
         }
 
+        return isDraw
     }
 
+    private fun checkHasWinner(): Boolean {
+
+        if (checkIsDrawFinishGame()) {
+            activity?.toast("Draw!")
+
+            finishGameInteractions()
+        }
+
+        return when {
+            gameOver(btn1, btn2, btn3) || // First row horizontal
+                    gameOver(btn1, btn4, btn7) ||  // First column vertical
+                    gameOver(btn4, btn5, btn6) || // Second row horizontal
+                    gameOver(btn2, btn5, btn8) || // Second column vertical
+                    gameOver(btn3, btn6, btn9) || // Third row vertical
+                    gameOver(btn1, btn5, btn9) || // First diagonal left to right
+                    gameOver(btn3, btn5, btn7) // Second diagonal right to left
+            -> true
+            else -> false
+        }
+    }
+
+    private fun gameOver(btnA: Button, btnB: Button, btnC: Button): Boolean {
+
+        if (checkButtonTextEquals(btnA, btnB, btnC) && checkNotEmpty(btnA, btnB, btnC)) {
+
+            finishGameInteractions()
+
+            return true
+        }
+
+        return false
+    }
+
+    private fun finishGameInteractions() {
+        for (b in buttons) {
+            b.setOnClickListener(null) // Not allowing game to continue
+        }
+    }
+
+    private fun checkNotEmpty(btnA: Button, btnB: Button, btnC: Button): Boolean {
+
+        return btnA.text != "" && btnB.text != "" && btnC.text != ""
+    }
+
+    private fun checkButtonTextEquals(btnA: Button, btnB: Button, btnC: Button): Boolean {
+
+        return btnA.text == btnB.text && btnA.text == btnC.text
+    }
 }
